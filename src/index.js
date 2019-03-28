@@ -5,9 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+import axios from "axios";
+require('dotenv').config();
 
-const baseUrl = "";//document.getElementsByTagName('base')[0].getAttribute('href');
+const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
+
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 ReactDOM.render(
   <BrowserRouter basename={baseUrl}>
@@ -17,7 +23,4 @@ ReactDOM.render(
   </BrowserRouter>,
   rootElement);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
